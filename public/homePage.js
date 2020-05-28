@@ -24,28 +24,22 @@ const moneyManager = new MoneyManager();
 moneyManager.addMoneyCallback = data => ApiConnector.addMoney(data, ({success, data}) => {
      if (success) {
         ProfileWidget.showProfile(data);
-        moneyManager.setMessage(success,"Баланс пополнен");
-    } else {
-        moneyManager.setMessage(!success,"Ошибка пополнения баланса");
-    }
+    } 
+    moneyManager.setMessage(success, data);
 });
 //конвертирование валют
 moneyManager.conversionMoneyCallback = data => ApiConnector.convertMoney(data, ({success, data}) => {
     if (success) {
         ProfileWidget.showProfile(data);
-        moneyManager.setMessage(success,"Конвертация выполнена");
-    } else {
-        moneyManager.setMessage(!success,"Ошибка конвертации");
     }
+    moneyManager.setMessage(success, data);
 });
 //перевод валюты
 moneyManager.sendMoneyCallback = data => ApiConnector.transferMoney(data, ({success, data}) => {
     if (success) {
         ProfileWidget.showProfile(data);
-        moneyManager.setMessage(success,"Перевод выполнен");
-    } else {
-        moneyManager.setMessage(!success,"Ошибка перевода");
-    }
+    } 
+    moneyManager.setMessage(success, data);
 });
 
 //Работа с избранным
@@ -64,10 +58,8 @@ favoritesWidget.addUserCallback = data => ApiConnector.addUserToFavorites(data, 
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(data);
         moneyManager.updateUsersList(data);
-        favoritesWidget.setMessage(success,"Пользователь добавлен");
-    } else {
-        favoritesWidget.setMessage(!success,"Ошибка добавления пользователя");
-    }
+    } 
+    favoritesWidget.setMessage(success, data);
 });
 //Реализуйте удаление пользователя из избранного
 favoritesWidget.removeUserCallback = data => ApiConnector.removeUserFromFavorites(data, ({success, data}) => {
@@ -75,8 +67,6 @@ favoritesWidget.removeUserCallback = data => ApiConnector.removeUserFromFavorite
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(data);
         moneyManager.updateUsersList(data);
-        favoritesWidget.setMessage(success,"Пользователь удален");
-    } else {
-        favoritesWidget.setMessage(!success,"Ошибка удаления пользователя");
-    }
+    } 
+    favoritesWidget.setMessage(success, data);
 });
